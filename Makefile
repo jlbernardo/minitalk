@@ -8,26 +8,22 @@ CFLAGS = -Werror -Wall -Wextra -g3
 LIBFT = ./libft/libft.a
 
 M_SRC = client.c server.c
-B_SRC = client_bonus.c server_bonus.c
 M_OBJ = $(M_SRC:.c=.o)
 B_OBJ = $(B_SRC:.c=.o)
 M_INC = -I minitalk.h
-B_INC = -I minitalk_bonus.h
 
-all: $(LIBFT) $(MANDATORY)
+all: $(LIBFT) $(NAME_C) $(NAME_S)
 
-$(MANDATORY): $(M_OBJ)
+$(NAME_C): $(M_OBJ)
 	$(CC) $(CFLAGS) client.o $(M_INC) $(LIBFT) -o $(NAME_C)
-	$(CC) $(CFLAGS) server.o $(M_INC) $(LIBFT) -o $(NAME_S)
 
-$(BONUS): $(B_OBJ)
-	$(CC) $(CFLAGS) client_bonus.o $(B_INC) $(LIBFT) -o $(NAME_C)
-	$(CC) $(CFLAGS) server_bonus.o $(B_INC) $(LIBFT) -o $(NAME_S)
+$(NAME_S): $(M_OBJ)
+	$(CC) $(CFLAGS) server.o $(M_INC) $(LIBFT) -o $(NAME_S)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(LIBFT) $(BONUS)
+bonus: all
 
 $(LIBFT):
 	make -C ./libft

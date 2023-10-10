@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 21:06:57 by julberna          #+#    #+#             */
-/*   Updated: 2023/10/09 21:37:07 by julberna         ###   ########.fr       */
+/*   Updated: 2023/10/09 23:22:21 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_char(int signo, siginfo_t *siginfo, void *context)
 
 	(void)context;
 	g_bit++;
-	else if (signo == SIGUSR2)
+	if (signo == SIGUSR2)
 		c |= 1;
 	if (g_bit == 8)
 	{
