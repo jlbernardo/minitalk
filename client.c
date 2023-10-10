@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:49:27 by julberna          #+#    #+#             */
-/*   Updated: 2023/10/09 23:46:34 by julberna         ###   ########.fr       */
+/*   Updated: 2023/10/10 00:03:38 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 	char				*string;
 	struct sigaction	signal;
 
-	if (argc != 3)
+	if (verification(argc, argv[1]))
 		return (1);
 	server_pid = ft_atoi(argv[1]);
 	string = argv[2];
@@ -53,4 +53,20 @@ void	send_bit(int server_pid, char c)
 		while (!g_handshake)
 			;
 	}
+}
+
+int	verification(int argc, char *pid)
+{
+	int	i;
+
+	i = 0;
+	if (argc != 3)
+		return (ft_printf("Wrong number of arguments.\n"));
+	while (pid[i] != '\0')
+	{
+		if (!ft_isdigit(pid[i]))
+			return (ft_printf("Wrong PID.\n"));
+		i++;
+	}
+	return (0);
 }
