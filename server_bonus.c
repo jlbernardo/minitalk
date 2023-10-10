@@ -6,10 +6,9 @@
 /*   By: julberna <julberna@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 21:06:57 by julberna          #+#    #+#             */
-/*   Updated: 2023/10/09 21:34:52 by julberna         ###   ########.fr       */
+/*   Updated: 2023/10/09 21:37:07 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minitalk_bonus.h"
 

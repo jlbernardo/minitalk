@@ -7,31 +7,34 @@ CC = cc
 CFLAGS = -Werror -Wall -Wextra -g3
 LIBFT = ./libft/libft.a
 
-C_SRC = client.c
-S_SRC = server.c
-C_OBJ = $(C_SRC:.c=.o)
-S_OBJ = $(S_SRC:.c=.o)
+M_SRC = client.c server.c
+B_SRC = client_bonus.c server_bonus.c
+M_OBJ = $(M_SRC:.c=.o)
+B_OBJ = $(B_SRC:.c=.o)
 M_INC = -I minitalk.h
+B_INC = -I minitalk_bonus.h
 
-all: $(LIBFT) $(NAME_C) $(NAME_S)
+all: $(LIBFT) $(MANDATORY)
 
-$(NAME_C): $(C_OBJ)
-	$(CC) $(CFLAGS) $(C_OBJ) $(M_INC) $(LIBFT) -o $(NAME_C)
+$(MANDATORY): $(M_OBJ)
+	$(CC) $(CFLAGS) client.o $(M_INC) $(LIBFT) -o $(NAME_C)
+	$(CC) $(CFLAGS) server.o $(M_INC) $(LIBFT) -o $(NAME_S)
 
-$(NAME_S): $(S_OBJ)
-	$(CC) $(CFLAGS) $(S_OBJ) $(M_INC) $(LIBFT) -o $(NAME_S)
-
-$(LIBFT):
-	make -C ./libft
+$(BONUS): $(B_OBJ)
+	$(CC) $(CFLAGS) client_bonus.o $(B_INC) $(LIBFT) -o $(NAME_C)
+	$(CC) $(CFLAGS) server_bonus.o $(B_INC) $(LIBFT) -o $(NAME_S)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: all
+bonus: $(LIBFT) $(BONUS)
+
+$(LIBFT):
+	make -C ./libft
 
 clean:
 	make clean -C ./libft
-	rm -f $(C_OBJ) $(B_OBJ)
+	rm -f $(M_OBJ) $(B_OBJ)
 
 fclean: clean
 	rm -f $(LIBFT)
