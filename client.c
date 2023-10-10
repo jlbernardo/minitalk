@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:49:27 by julberna          #+#    #+#             */
-/*   Updated: 2023/10/09 22:37:35 by julberna         ###   ########.fr       */
+/*   Updated: 2023/10/09 23:46:34 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char **argv)
 	server_pid = ft_atoi(argv[1]);
 	string = argv[2];
 	signal.sa_handler = receive_signal;
-//	sigemptyset(&signal.sa_mask);
 	signal.sa_flags = 0;
 	sigaction(SIGUSR1, &signal, NULL);
 	while (*string != '\0')

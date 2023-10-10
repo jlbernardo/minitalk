@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 21:06:57 by julberna          #+#    #+#             */
-/*   Updated: 2023/10/09 23:22:21 by julberna         ###   ########.fr       */
+/*   Updated: 2023/10/09 23:46:49 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(void)
 	struct sigaction	print;
 
 	print.sa_sigaction = print_char;
-	sigemptyset(&print.sa_mask);
 	print.sa_flags = SA_SIGINFO;
 	ft_printf("Server PID: %i\n\n", getpid());
 	sigaction(SIGUSR1, &print, NULL);
