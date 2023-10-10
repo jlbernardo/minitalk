@@ -6,14 +6,11 @@
 /*   By: julberna <julberna@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:49:27 by julberna          #+#    #+#             */
-/*   Updated: 2023/10/09 18:12:44 by julberna         ###   ########.fr       */
+/*   Updated: 2023/10/09 21:14:47 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
-void	receive_signal(int signo);
-void	send_bit(int server_pid, char c);
 
 int	g_handshake = 0;
 
@@ -37,8 +34,8 @@ int	main(int argc, char **argv)
 
 void	receive_signal(int signo)
 {
-	g_handshake = 1;
-	write(1, &signo, 0);
+	if (signo == SIGUSR1)
+		g_handshake = 1;
 }
 
 void	send_bit(int server_pid, char c)
@@ -50,18 +47,11 @@ void	send_bit(int server_pid, char c)
 	{
 		g_handshake = 0;
 		if (((c >> bit) & 1) == 0)
-		{
-			write(1, "0", 1);
 			kill(server_pid, SIGUSR1);
-		}
 		else if (((c >> bit) & 1) == 1)
-		{
-			write(1, "1", 1);
 			kill(server_pid, SIGUSR2);
-		}
 		bit--;
 		while (!g_handshake)
 			;
 	}
-	write(1, "\n", 1);
 }
