@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 15:09:42 by julberna          #+#    #+#             */
-/*   Updated: 2023/05/29 00:18:52 by julberna         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:35:58 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*ptr;
+	void	*pointer;
 	int		result;
 
-	ptr = NULL;
+	pointer = NULL;
 	result = nmemb * size;
-	if (!nmemb || !size || !(nmemb != result / size))
-		ptr = malloc(result);
-	if (ptr)
-		ft_bzero(ptr, (nmemb * size));
-	return (ptr);
+	if (!nmemb || !size || nmemb == result / size)
+		pointer = malloc(result);
+	if (pointer)
+		while (result--)
+			*(unsigned char *)(pointer + result) = 0;
+	return (pointer);
 }
